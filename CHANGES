@@ -59,6 +59,7 @@ V 1.04 2021/01/17 PS
 - commented out malloc.h in menu.h as malloc is defined in stdlib.h now.  This enabled compiling on
   MacOS which doesn't have a malloc.h header
 - change Makefile to use ncurses library 
+- placed all source under GitHub.  Initial checkin is the 1.04 release.
 
 IDEAS:
 - Add color
