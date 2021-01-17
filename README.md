@@ -1,6 +1,7 @@
 # dmsh
 Dartmouth Menu Shell
 
+```
 dmsh(1) 			     MENU			       dmsh(1)
 
 NAME
@@ -126,3 +127,4 @@ REVISIONS
        Sun Jan 17 07:50:19 CST 2021
 
 Dartmouth College		   Jan 2021			       dmsh(1)
+```
