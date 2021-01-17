@@ -1,8 +1,8 @@
-Toolchest - Main Menu:*:*
-Desktop:M:~richard/dmsh/desktop.mnu
+Toolchest - Main Menu:T:noop
+Desktop:M:~pete/dmsh/desktop.mnu
 System:M:system.mnu
 Software:M:software.mnu
 Remote Login:M:remote-login.mnu
 
 Date and Time:P:clear;date
-Test ~user:P:cd ~bioepi; /bin/pwd; echo $PWD; 
+Test ~user:P:cd ~; /bin/pwd; echo $PWD; 

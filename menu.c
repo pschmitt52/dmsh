@@ -194,11 +194,11 @@ int state;
         }
     }
     if (state == 1) {
-        mvaddstr(i+5,4, "[Q/q]  Quit");
-        prtmsg("Enter a letter or [ESC/q/Q] to quit",0);
+        mvaddstr(i+5,4, "[q]  Quit");
+        prtmsg("Enter a letter or [ESC/q] to quit",0);
     } else {
-        mvaddstr(i+5,4, "[ESC/q/Q]  Return to previous menu");
-        prtmsg("Enter a letter or [ESC/q/Q] to return",0);
+        mvaddstr(i+5,4, "[ESC/q]  Return to previous menu");
+        prtmsg("Enter a letter or [ESC/q] to return",0);
     }
     mvaddstr(i+6,2, "Select Value: ");                     
     move(i+6,16);                       
