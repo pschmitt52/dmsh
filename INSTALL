@@ -1,0 +1,6 @@
+To build dmsh:
+    Just type "make".
+
+To install dmsh:
+    By default dmsh will be installed in /usr/local/bin and the man page, dmsh.1, will be installed in /usr/local/man/man1.
+    Edit the Makefile and change the BINDEST and MANDEST variables to change these locations.
