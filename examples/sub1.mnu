@@ -1,0 +1,7 @@
+Internet Tools:T:noop
+Electronic Mail:N:pine
+UseNet News:N:tin -r
+Gopher:N:gopher gopher.dartmouth.edu
+WWW (lynx):N:lynx
+Editors:m:sub2.mnu
+

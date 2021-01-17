@@ -1,0 +1,5 @@
+Editors:T:noop
+Emacs:N:emacs -nw
+Pico:N:pico
+Vi:N:vi
+Joe:N:joe

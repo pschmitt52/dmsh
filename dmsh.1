@@ -1,0 +1,163 @@
+.TH dmsh 1 "Dec 2002" "Dartmouth College" "MENU"
+
+.SH NAME
+.B dmsh
+\- Dartmouth Menu Shell
+
+.SH SYNOPSIS
+.B dmsh
+[options] [menufile]
+
+.SH OPTIONS
+No options are supported at this time.
+.; Use the .TP macro for options
+
+.SH DESCRIPTION
+.; [ Detailed explanation of programs and options of dmsh.
+.; New paragraphs are introduced by .PP at start of line]
+.; .I [ Standout mode
+.; may be produced by beginning the line with .I ]
+.; .TP 
+.; subsections
+.; may be introduced with the .TP macro
+.; (Tagged Paragraph).  See man(5) for other available macros
+
+.B dmsh
+is a curses-based menu generator.
+It has the ability to run programs and access additional menu files.
+The default menu file is called 
+.B main.mnu
+in the current working
+directory.  A menu file pathname may also be given on the command line.
+
+.SH MENU FILE DESCRIPTION
+The menu file is a text file consisting of ":" delimited records.
+Lines beginning with a '#' are considered comments and ignored.
+Each record (line) has three fields.  There is a line length
+limit of 512 bytes
+.PP
+For backward compatability, the first record in the menu file is reserved for
+a title of the menu, and is always treated as a "T" line.  This feature may go away.
+Also for backward compatability, a blank line in the menu file is treated as a "T"
+line consisting of a series of dashes, to make simple screen dividers
+for menu groups.
+
+.SS Fields
+Field 1 is the description that will show up as a menu selection on the screen.
+It has a length limit of 80 characters.
+.PP
+Field 2 is a 1-character (case insensitive) flag indicating how the
+rest of the record is to be interpreted.  It is selected from the following list.
+Any other characters in that field will cause the record to be displayed on screen
+as "(invalid)".
+.PP
+Field 3 -- the rest of the line, consists of the command to be executed when this
+menu item is selected.  It is passed to the system() library function and so can 
+contain shell metacharacters.  In the case of submenus, field 3 is the pathname of the
+menu file to be opened.
+.SS Field 2 Options
+.TP 
+T
+"T" is used to indicate  that field 1 contains text to become part of 
+the displayed menu.  It is used for headers or section separators, 
+and any field 3 is ignored.
+No menu letter is assigned to this line.  Completely blank lines may be 
+generated with a null first field.
+.TP
+P
+"P" indicates that field 3 contains a program or script to run (via system())
+when this menu item is selected.  
+.B dmsh
+will pause after running the program, until the [RETURN] key is pressed
+.TP
+N
+"N" indicates that field 3 contains a program or script to run (via system())
+when this menu item is selected.  On completion, dmsh continues immediately and
+redraws the current menu.  If the system() call exits with a non-zero value, then a
+warning message is displayed, and 
+.B dmsh
+pauses to allow error messages to be seen, as if "P" had been used.
+.TP
+Q
+"Q" is interpreted as for "N", but
+.B dmsh
+exits immediately after running the command.  The menu is not redisplayed.
+.TP
+*
+"*" is used to disable menu items.  The description still appears, but the
+string "(unavailable)" is appended.  It can be used to disable an item without
+removing the item completely.
+.TP
+M
+"M" indicates a sub-menu.  The string "(menu)" is appended to the description
+and field 3 is interpreted as a file name to be openend and read as a new menu file.
+The "~user" syntax is interpreted if found at the start of the pathname.
+
+.SS Field 3 options
+The program can be a series of shell commands, and programs 
+delimited by the semi-colon.  Any /bin/sh metacharacters may be used.  The command 
+may contain ":" since no further parsing for fields is performed after locating the
+start of field 3 on the line.
+
+.SH MENU SELECTION
+Each  menu selection is given a letter label,  starting with [a].
+
+The menu item [q] is added to every menu, and either quits the program (if at the
+tope level) or returns to the previous menu (if in a sub-menu).  The ESC key may 
+also be used in place of 'q'.
+
+Pressing a single letter key will run the corresponding command.  Pressing the uppercase
+menu letter will display what would be run, for debugging.
+
+.SH Examples
+.nf
+\fC
+Main Menu:T:noop
+Internet Tools:M:sub1.mnu
+Today's Date:p:clear;date
+Who's On:p:clear;finger|sort
+Compile a Program:*:noop
+Shell:N:clear;echo "Type exit to return";PS1='$ ';export PS1;$SHELL
+Directory Listing:p:clear;ls -lA
+\fI<this empty line will show as dashes>
+\fR
+
+If the program is invoked with the above file as the argument, the display
+appears as follows:
+.nf
+\fB
+   Dartmouth Menu Shell, version: <version>  <date and time>
+
+        Main Menu    
+\fR
+    [a]  Internet Tools (menu)
+    [b]  Today's Date
+    [c]  Who's On
+    [d]  Compile a Program (unavailable)
+    [e]  Shell
+    [f]  Directory Listing
+     ---------------
+    [q]  Quit
+
+  Select Value:
+
+\fB
+ MESSAGES:   Enter a letter or [q] to quit 
+.fi
+
+\fR
+
+.SH FILES
+main.mnu
+
+.; .SH "SEE ALSO"
+.; [ dmsh's references to related documents, other manual pages]
+
+.; .SH DIAGNOSTICS
+.; [ description of unusual output (e.g., see cmp(1))]
+
+.; .SH BUGS
+.; [ surprising features of dmsh, not necessarily bugs...]
+
+.SH REVISIONS
+Wed Jan  1 18:29:17 EST 2003

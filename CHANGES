@@ -1,0 +1,70 @@
+V 0.8 changes to accomodate Bio-Epi group use on Brooks and Cascade:
+
+Redefined MESSAGE from 19 to 21 to match actual executable on Belknap
+Redefined MAXLINE from 250 to 512 to accomodate enormous scripts in bioepi menus
+(Also made to v1.x).  Increased the fixed size of the object field in the menu struct
+to also be MAXLINE (was 256)
+
+
+V 1.0 2001/06/01 RB
+
+- Redefined MESSAGE from 21 to (LINES-5).  This is the screen position of the message
+area at the bottom of the screen, and tying it to LINES makes it work on any size
+screen supported by curses.  (Still no support for menus which exceed a single screen)
+- Increased maximum size of desc field to 80 (was 50)
+- Added 1-byte "label" field to the menu struct so that labels can be something other
+than just index into the array of menu structs.  Experimented with using numbers instead
+of letters, but this limits us at 9 items.
+- label/separator lines do _not_ get a letter assigned to them, only active lines.
+- miscellaneous code cleanup and buffer overrun protection.
+- menu file syntax cleanup - explicit support for display labels ("T" in field 2)
+- syntax to run a program and quit ("Q" in field 2)
+
+V 1.01 2002/12/04 RB
+
+- Redefined MAXLINE from 250 to 512 to accomodate enormous scripts in bioepi menus
+(it would be nice to allocate this buffer dynamically and accomodate line continuation
+with "\" escape, but that would be a larger change to the code).  MAXLINE is the
+buffer used for the initial file parsing.  Increased the fixed size of the object field
+in the menu struct to also be MAXLINE (was 256).
+- Added support for resolving "~user" at the start of a pathname to a submenu file.
+Variable newpath[MAXPATH] and some char * pointers added.  Uses getpwnam().
+- Added support for a debug mode - selecting a menu item using the equivalent capital
+letter just displays what the command would do, rather than execute the command (also
+would be nice to have a debug option that only worked this way).
+- Any unparseable item in field 2 is no longer assigned a letter code.  (Original
+version defaults to assigning these)
+- menu file syntax cleanup - explicitly skip over comment lines.
+- Use bold to highlight sub-menus 
+- Use bold for menu text lines - optionally
+- Change error message for selecting an "unavailable" item - allow them to be selected
+  so that they can be displayed in debug mode.
+
+V 1.02 2003/05/16 RB
+
+- Placed all source under RCS. Initial checkin is the 1.01 release.
+- Extended "debug" mode so an uppercase sub-menu seletion displays the filename that would be
+opened.
+
+V 1.03 2006/04/12 RB
+
+- Added function prototypes to remove compiler warnings, and to ensure no pointer-int assumptions.
+  Code was segfaulting when compiled on 64-bit systems because of this
+- Added check on return status of the system() call in runprog(), to allow user to see error
+  messages and know the status was non-zero.
+  Compiled and tested on AIX and Linux (32/64 bit)
+
+V 1.04 2021/01/17 PS
+
+- commented out malloc.h in menu.h as malloc is defined in stdlib.h now.  This enabled compiling on
+  MacOS which doesn't have a malloc.h header
+
+IDEAS:
+- Skip dashes on unparseable lines except in backward compatability mode ?
+- Beep on errors ?
+- optionally skip the main header (version/date)
+- optionally skip interpreting the first line as a menu header - make it explicitly
+  a T line
+- need to sanity check the "todo" field and ensure it is only 1 character, and
+  explicitly define the action if the value is unexpected.
+- Add a -o option in invoke old mode and use that for all the backward compatability stuff.

@@ -1,0 +1,8 @@
+Main Menu:T:noop
+Internet Tools:M:sub1.mnu
+Today's Date:p:clear;date
+Who's On:p:clear;finger|sort|more
+Compile a Program:*:noop
+Shell:N:clear;echo "Type exit to return to menu";sleep 2;PS1='$ ';export PS1;$SHELL
+Directory Listing:p:clear;ls -lA
+
