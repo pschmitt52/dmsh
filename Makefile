@@ -16,7 +16,7 @@ CFLAGS        = -O -Wall $(DEBUG) $(DEFS)
 # Libraries - older systems need both termcap and curses.  At least for RHEL4
 # linux, termcap is no longer needed
 # LIBS	      = -lcurses -ltermcap 
-LIBS	      = -lcurses
+LIBS	      = -lncurses
 
 BINDEST	      = /usr/local/bin
 MANDEST       = /usr/local/man/man1
