@@ -17,7 +17,7 @@
 /* #include <malloc.h> */    /* included in stdlib.h now */
 #include <pwd.h>
 
-#define VERSION "1.03"
+#define VERSION "1.04"
 #define MAXLINE 512       /* 2002/12/05 RB Increased from 250 for Bio-Epi */
 #define MESSAGE (LINES-5) /* was fixed to 19 originally */
 
