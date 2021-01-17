@@ -58,8 +58,11 @@ V 1.04 2021/01/17 PS
 
 - commented out malloc.h in menu.h as malloc is defined in stdlib.h now.  This enabled compiling on
   MacOS which doesn't have a malloc.h header
+- change Makefile to use ncurses library 
 
 IDEAS:
+- Add color
+- Have a configure script available
 - Skip dashes on unparseable lines except in backward compatability mode ?
 - Beep on errors ?
 - optionally skip the main header (version/date)
