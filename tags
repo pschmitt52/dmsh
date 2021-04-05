@@ -1,0 +1,20 @@
+MENU	menu.h	/^}MENU;$/
+Mmain	main.c	/^int main(argc,argv)$/
+choose	menu.c	/^choose(item,num)$/
+clrmsg	misc.c	/^void clrmsg(int offset)$/
+clrworkarea	misc.c	/^void clrworkarea()$/
+die	main.c	/^void die()$/
+display	menu.c	/^display(item,num,state)$/
+fgetline	misc.c	/^int fgetline(fd, s, lim)$/
+get_hidden	misc.c	/^void get_hidden(string)$/
+get_input	misc.c	/^void get_input(string)$/
+get_time	misc.c	/^get_time()$/
+initinput	main.c	/^void initinput()$/
+intro	main.c	/^void intro(version)$/
+menu	menu.c	/^void menu(file)$/
+parse	menu.c	/^parse(line, item)$/
+prtmsg	misc.c	/^void prtmsg(message,offset)$/
+runprog	menu.c	/^runprog(program, debug, pause)$/
+stripcrlf	misc.c	/^stripcrlf(s)$/
+wrap	main.c	/^void wrap(menufile)$/
+xclrworkarea	misc.c	/^void xclrworkarea()$/
